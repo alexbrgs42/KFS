@@ -13,13 +13,13 @@ IMPORTANT NOTE: the VGA text mode (as well as the BIOS) is deprecated on newer m
 
 Link the kernel:
 ```
-    i686-elf-gcc -T linker.ld -o myos.bin -ffreestanding -O2 -nostdlib boot.o kernel.o -lgcc
+    i686-elf-gcc -T linker.ld -o kfs.bin -ffreestanding -O2 -nostdlib boot.o kernel.o -lgcc
 ```
 
 Generate the .iso:
 ``` 
     mkdir -p isodir/boot/grub
-    cp myos.bin isodir/boot/myos.bin
+    cp kfs.bin isodir/boot/kfs.bin
     cp grub.cfg isodir/boot/grub/grub.cfg
-    grub-mkrescue -o myos.iso isodir
+    grub-mkrescue -o kfs.iso isodir
 ```
