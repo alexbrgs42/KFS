@@ -3,15 +3,8 @@
 
 #include <sys/cdefs.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
+// GCC keyword to indicate that the following function will never return
 __attribute__((__noreturn__))
 void abort(void);
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif

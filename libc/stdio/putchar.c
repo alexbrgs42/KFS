@@ -11,5 +11,5 @@ int putchar(int ic) {
 #else
 	// TODO: Implement stdio and the write system call.
 #endif
-	return ic;
+	return (ic);
 }
