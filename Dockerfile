@@ -11,11 +11,10 @@ RUN apt update && apt upgrade && apt install -y \
 
 COPY . .
 
-RUN clang --target=i386-unknown-none -c boot.asm -o boot.o
-RUN clang --target=i386-unknown-none -c main.c -o main.o -std=gnu99 -ffreestanding -O2 -Wall -Wextra
-RUN clang --target=i386-unknown-none -T linker.ld -o kfs.bin -ffreestanding -O2 -nostdlib boot.o main.o
+RUN clang --target=i386-unknown-none -c /src/CONF/boot.asm -o boot.o
+RUN make -C /src/BUILD
 
 RUN mkdir -p isodir/boot/grub
-RUN cp kfs.bin isodir/boot/kfs.bin
-RUN cp grub.cfg isodir/boot/grub/grub.cfg
+RUN cp /src/BUILD/kfs.bin isodir/boot/kfs.bin
+RUN cp /src/CONF/grub.cfg isodir/boot/grub/grub.cfg
 RUN grub-mkrescue -o kfs.iso isodir
