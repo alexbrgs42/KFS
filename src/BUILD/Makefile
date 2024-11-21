@@ -13,7 +13,7 @@ INCL		=	../INCL/libc.h
 
 TARGET		=	--target=i386-unknown-none
 
-FLAGS		=	-std=gnu99 -ffreestanding -Wall -Wextra -fno-builtin -fno-exceptions -fno-stack-protector -nostdlib -nodefaultlibs
+FLAGS		=	-std=gnu99 -O2 -ffreestanding -Wall -Wextra -fno-builtin -fno-exceptions -fno-stack-protector -nostdlib -nodefaultlibs
 
 COLOR_GREEN	=	\033[1;32m
 COLOR_RED	=	\033[1;31m
