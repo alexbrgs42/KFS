@@ -1,6 +1,9 @@
 # ---------------------------------------------------------------------------- #
+SRCS		=	../KERNEL/main.c \
+				../KERNEL/TTY/color.c \
+				../KERNEL/TTY/display.c \
+				../KERNEL/TTY/init.c
 
-SRCS		=	../KERNEL/main.c
 # ---------------------------------------------------------------------------- #
 
 OBJS		=	$(SRCS:.c=.o)
@@ -9,7 +12,7 @@ DEPS		=	$(SRCS:.c=.d)
 
 CLANG		=	clang
 
-INCL		=	../INCL/libc.h
+INCL		=	../INCL
 
 TARGET		=	--target=i386-unknown-none
 
@@ -22,7 +25,7 @@ COLOR_PURP	=	\033[1;35m
 COLOR_END	=	\033[0m
 
 %.o: %.c
-	@$(CLANG) $(TARGET) $(FLAGS) -include $(INCL) -c $< -o $@
+	@$(CLANG) $(TARGET) $(FLAGS) -I $(INCL) -c $< -o $@
 	@echo "$(COLOR_BLUE) || Compiling ($<)...$(COLOR_END)"
 
 all: $(OBJS) $(INCL)
