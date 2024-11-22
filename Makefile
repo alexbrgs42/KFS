@@ -13,7 +13,7 @@ COLOR_END	=	\033[0m
 all: $(ISO_FILE)
 
 run: $(ISO_FILE)
-	kvm kfs.iso
+	kvm -cpu host -drive file=kfs.iso,format=raw
 
 $(ISO_FILE):
 	@docker build -t $(DOCKER_IMAGE) .
