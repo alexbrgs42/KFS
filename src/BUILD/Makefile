@@ -2,7 +2,9 @@
 SRCS		=	../KERNEL/main.c \
 				../KERNEL/TTY/color.c \
 				../KERNEL/TTY/display.c \
-				../KERNEL/TTY/init.c
+				../KERNEL/TTY/init.c \
+				../KERNEL/TTY/vga.c \
+				../LIBS/LIBC/STRING/strlen.c
 
 # ---------------------------------------------------------------------------- #
 

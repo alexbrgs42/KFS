@@ -50,4 +50,7 @@ void	terminal_initialize(void);
 void	terminal_set_color(uint8_t color);
 void	terminal_write_buffer(const char* data);
 
+uint8_t vga_entry_color(vga_color fg, vga_color bg);
+uint16_t vga_entry(unsigned char uc, uint8_t color);
+
 #endif
