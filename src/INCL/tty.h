@@ -1,9 +1,9 @@
 #ifndef TTY_H
 # define TTY_H
 
-#include <stdbool.h>
-#include <stddef.h>
-#include <stdint.h>
+# include <stdbool.h>
+# include <stddef.h>
+# include <stdint.h>
 
 /**********************************************************************************/
 /*                                GLOBAL VARIABLES                                */
@@ -16,6 +16,12 @@ extern size_t		terminal_row;						/* row of the cursor of the terminal */
 extern size_t		terminal_column;					/* column of the cursor of the terminal */
 extern uint8_t		terminal_color;						/* color of the text of the terminal */
 extern uint16_t*	terminal_buffer;					/* vga buffer for writing on the terminal */
+
+static char     screen_buffer_a[2000];
+static char     screen_buffer_b[2000];
+static char     screen_buffer_c[2000];
+
+static char *   current_screen_buffer;
 
 /**********************************************************************************/
 /*                                     COLORS                                     */
@@ -53,6 +59,10 @@ void	terminal_write_buffer(const char* data);
 uint8_t vga_entry_color(vga_color fg, vga_color bg);
 uint16_t vga_entry(unsigned char uc, uint8_t color);
 
+void    enable_cursor(uint8_t cursor_start, uint8_t cursor_end);
 void    update_cursor(bool line_break);
+
+void    clear_buffer(char *screen_buffer);
+void    load_buffer(char *screen_buffer);
 
 #endif
