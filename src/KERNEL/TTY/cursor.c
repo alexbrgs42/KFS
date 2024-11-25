@@ -2,7 +2,7 @@
 #include "../../INCL/io.h"
 
 /// @brief  Updates cursor's position
-/// @param  If the char that was wrote is a \n, the logic changes a bit
+/// @param  If the char that was written is a \n, the logic changes a bit
 void    update_cursor(bool line_break) {
 
     if (line_break == true) {
