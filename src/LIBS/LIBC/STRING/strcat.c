@@ -25,7 +25,7 @@ char *strcat(char *dest, const char *s1, const char *s2) {
         s2_iter++;
     }
 
-    dest[s1_iter + s2_iter] = '/0';
+    dest[s1_iter + s2_iter] = 0;
 
     return (dest);
 }

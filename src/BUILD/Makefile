@@ -1,5 +1,6 @@
 # ---------------------------------------------------------------------------- #
-SRCS		=	../KERNEL/main.c \
+
+KERNEL_SRCS	=	../KERNEL/main.c \
 				../KERNEL/TTY/color.c \
 				../KERNEL/TTY/display.c \
 				../KERNEL/TTY/init.c \
@@ -7,13 +8,23 @@ SRCS		=	../KERNEL/main.c \
 
 # ---------------------------------------------------------------------------- #
 
-OBJS		=	$(SRCS:.c=.o)
+LIBS_SRCS	=	../LIBS/LIBC/printk.c \
+				../LIBS/LIBC/STRING/strcat.c ../LIBS/LIBC/STRING/strcmp.c ../LIBS/LIBC/STRING/strcpy.c ../LIBS/LIBC/STRING/strlen.c \
+				../LIBS/LIBC/MEM/memcmp.c ../LIBS/LIBC/MEM/memcpy.c ../LIBS/LIBC/MEM/memmove.c
+
+# ---------------------------------------------------------------------------- #
+
+KERNEL_OBJS	=	$(KERNEL_SRCS:.c=.o)
+
+LIBS_OBJS	=	$(LIBS_SRCS:.c=.o)
+
+# ---------------------------------------------------------------------------- #
 
 CLANG		=	clang
 
 INCL		=	../INCL
 
-LIBKFS		=	../LIBS/libkfs.a
+NAME		=	kfs.bin
 
 TARGET		=	--target=i386-unknown-none
 
@@ -25,26 +36,26 @@ COLOR_BLUE	=	\033[3;36m
 COLOR_PURP	=	\033[1;35m
 COLOR_END	=	\033[0m
 
+# ---------------------------------------------------------------------------- #
+
 %.o: %.c
 	@$(CLANG) $(TARGET) $(FLAGS) -I $(INCL) -c $< -o $@
 	@echo "$(COLOR_BLUE) || Compiling ($<)...$(COLOR_END)"
 
-all: $(LIBKFS) $(OBJS) 
-	@$(CLANG) $(TARGET) -T ../CONF/linker.ld -I $(INCL) -L../LIBS -lkfs -o kfs.bin -ffreestanding -O2 -nostdlib ../../boot.o $(OBJS)
+all: $(NAME)
+
+$(NAME): $(KERNEL_OBJS) $(LIBS_OBJS)
+	@$(CLANG) $(TARGET) -T ../CONF/linker.ld -I $(INCL) -o $(NAME) -ffreestanding -O2 -nostdlib ../../boot.o $(LIBS_OBJS) $(KERNEL_OBJS) 
 	@echo "$(COLOR_GREEN) || Done !$(COLOR_END)"
 
-$(LIBKFS): $(INCL)
-	@$(MAKE) -C ../LIBS
-	@echo "$(COLOR_GREEN) || Compiled Libkfs! $(COLOR_END)"
+# ---------------------------------------------------------------------------- #
 
 clean:
-	@rm -rf $(OBJS)
-	@$(MAKE) --no-print-directory -C ../LIBS clean
+	@rm -rf $(KERNEL_OBJS) $(LIBS_OBJS)
 	@echo "$(COLOR_RED) || Cleaning files...$(COLOR_END)"
 
 fclean: clean
 	@rm -rf kfs.bin
-	@$(MAKE) --no-print-directory -C ../LIBS fclean
 	@echo "$(COLOR_RED) || Cleaning library...$(COLOR_END)"
 
 re: fclean all

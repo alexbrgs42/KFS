@@ -7,8 +7,7 @@ RUN apt update && apt upgrade && apt install -y \
     gcc \
     grub2-common \
     xorriso \
-    grub-pc-bin \
-    binutils
+    grub-pc-bin 
 
 COPY . .
 
