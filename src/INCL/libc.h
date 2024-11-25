@@ -5,6 +5,8 @@
 # include <stdint.h>
 # include <stdbool.h>
 
+int         printk(uint16_t log_level, const char *string);
+
 // ------- STRING -------
 size_t      strlen(const char *str);
 uint16_t    strcmp(const char *s1, const char *s2);

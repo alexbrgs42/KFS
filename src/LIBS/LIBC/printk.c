@@ -26,8 +26,7 @@ int printk(uint16_t log_level, const char *string) {
             break ;
 
         default:
-            terminal_write_buffer("printk: Unknown log level, aborting \n");
-            return (1);
+            terminal_write_buffer(string);
     }
 
     terminal_write_buffer("\n");

@@ -1,4 +1,5 @@
 #include "../INCL/tty.h"
+#include "../INCL/libc.h"
 
 size_t		terminal_row;
 size_t		terminal_column;
@@ -11,5 +12,5 @@ void kernel_main(void)
 	terminal_initialize();
 
 	/* Newline support is left as an exercise. */
-	terminal_write_buffer("Hello, kernel World!\n");
+	printk(0, "Hello from printk");
 }

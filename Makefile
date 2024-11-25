@@ -24,10 +24,12 @@ $(ISO_FILE):
 
 clean:
 	@rm -rf kfs.iso
+	@$(MAKE) --no-print-directory -C src/BUILD clean
 	@echo "$(COLOR_RED) || Cleaning files...$(COLOR_END)"
 
 fclean: clean
 	@docker system prune -af
+	@$(MAKE) --no-print-directory -C src/BUILD fclean
 	@echo "$(COLOR_RED) || Cleaning docker files...$(COLOR_END)"
 
 re: fclean all

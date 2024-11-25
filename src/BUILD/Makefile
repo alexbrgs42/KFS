@@ -3,18 +3,17 @@ SRCS		=	../KERNEL/main.c \
 				../KERNEL/TTY/color.c \
 				../KERNEL/TTY/display.c \
 				../KERNEL/TTY/init.c \
-				../KERNEL/TTY/vga.c \
-				../LIBS/LIBC/STRING/strlen.c
+				../KERNEL/TTY/vga.c 
 
 # ---------------------------------------------------------------------------- #
 
 OBJS		=	$(SRCS:.c=.o)
 
-DEPS		=	$(SRCS:.c=.d)
-
 CLANG		=	clang
 
 INCL		=	../INCL
+
+LIBKFS		=	../LIBS/libkfs.a
 
 TARGET		=	--target=i386-unknown-none
 
@@ -30,16 +29,22 @@ COLOR_END	=	\033[0m
 	@$(CLANG) $(TARGET) $(FLAGS) -I $(INCL) -c $< -o $@
 	@echo "$(COLOR_BLUE) || Compiling ($<)...$(COLOR_END)"
 
-all: $(OBJS) $(INCL)
-	@$(CLANG) $(TARGET) -T ../CONF/linker.ld -o kfs.bin -ffreestanding -O2 -nostdlib ../../boot.o $(OBJS)
+all: $(LIBKFS) $(OBJS) 
+	@$(CLANG) $(TARGET) -T ../CONF/linker.ld -I $(INCL) -L../LIBS -lkfs -o kfs.bin -ffreestanding -O2 -nostdlib ../../boot.o $(OBJS)
 	@echo "$(COLOR_GREEN) || Done !$(COLOR_END)"
+
+$(LIBKFS): $(INCL)
+	@$(MAKE) -C ../LIBS
+	@echo "$(COLOR_GREEN) || Compiled Libkfs! $(COLOR_END)"
 
 clean:
 	@rm -rf $(OBJS)
+	@$(MAKE) --no-print-directory -C ../LIBS clean
 	@echo "$(COLOR_RED) || Cleaning files...$(COLOR_END)"
 
 fclean: clean
-	@rm -rf $(DEPS)
+	@rm -rf kfs.bin
+	@$(MAKE) --no-print-directory -C ../LIBS fclean
 	@echo "$(COLOR_RED) || Cleaning library...$(COLOR_END)"
 
 re: fclean all
