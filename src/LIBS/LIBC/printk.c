@@ -1,3 +1,35 @@
-//TODO : printf-like function but with an extra argument at the beginning, an int that represents log level
-//TODO : 1 -> Critical error, 2 -> Error, 3 -> warning, 4 -> info
-//TODO : ex : printk(2, %s) = ERROR : %s
+#include "../INCL/libc.h"
+#include "../INCL/tty.h"
+
+int printk(uint16_t log_level, const char *string) {
+
+    switch (log_level) {
+
+        case 1:
+            terminal_write_buffer("CRITICAL ERROR: ");
+            terminal_write_buffer(string);
+            break ;
+        
+        case 2:
+            terminal_write_buffer("ERROR: ");
+            terminal_write_buffer(string);
+            break ;
+
+        case 3:
+            terminal_write_buffer("WARNING: ");
+            terminal_write_buffer(string);
+            break ;
+
+        case 4:
+            terminal_write_buffer("INFO: ");
+            terminal_write_buffer(string);
+            break ;
+
+        default:
+            terminal_write_buffer("printk: Unknown log level, aborting \n");
+            return (1);
+    }
+
+    terminal_write_buffer("\n");
+    return (0);
+}
