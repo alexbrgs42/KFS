@@ -1,16 +1,15 @@
 # ---------------------------------------------------------------------------- #
 
 KERNEL_SRCS	=	../KERNEL/main.c \
-				../KERNEL/TTY/color.c \
-				../KERNEL/TTY/display.c \
-				../KERNEL/TTY/init.c \
-				../KERNEL/TTY/vga.c 
+				../KERNEL/TTY/color.c ../KERNEL/TTY/display.c ../KERNEL/TTY/init.c \
+				../KERNEL/TTY/vga.c ../KERNEL/TTY/cursor.c
 
 # ---------------------------------------------------------------------------- #
 
 LIBS_SRCS	=	../LIBS/LIBC/printk.c \
 				../LIBS/LIBC/STRING/strcat.c ../LIBS/LIBC/STRING/strcmp.c ../LIBS/LIBC/STRING/strcpy.c ../LIBS/LIBC/STRING/strlen.c \
-				../LIBS/LIBC/MEM/memcmp.c ../LIBS/LIBC/MEM/memcpy.c ../LIBS/LIBC/MEM/memmove.c
+				../LIBS/LIBC/MEM/memcmp.c ../LIBS/LIBC/MEM/memcpy.c ../LIBS/LIBC/MEM/memmove.c \
+				../LIBS/IO/outb.c
 
 # ---------------------------------------------------------------------------- #
 

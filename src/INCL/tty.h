@@ -53,4 +53,6 @@ void	terminal_write_buffer(const char* data);
 uint8_t vga_entry_color(vga_color fg, vga_color bg);
 uint16_t vga_entry(unsigned char uc, uint8_t color);
 
+void    update_cursor(bool line_break);
+
 #endif
