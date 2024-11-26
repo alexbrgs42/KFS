@@ -1,5 +1,10 @@
 #include "../../INCL/tty.h"
 
+/*  */
+
+/// @brief Initializes the terminal by initializing its associated global variables
+// 			and displaying the space char for every characters to display an empty terminal.
+/// @param  None
 void terminal_initialize(void)
 {
 	terminal_row = 0;
@@ -16,7 +21,7 @@ void terminal_initialize(void)
     // load_buffer(screen_buffer_a);
     // current_screen_buffer = screen_buffer_a;
 
-    for (size_t y = 0; y < VGA_HEIGHT; y++) {
+	for (size_t y = 0; y < VGA_HEIGHT; y++) {
 		for (size_t x = 0; x < VGA_WIDTH; x++) {
 			const size_t index = y * VGA_WIDTH + x;
 			terminal_buffer[index] = vga_entry(' ', terminal_color);
