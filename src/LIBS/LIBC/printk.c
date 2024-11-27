@@ -36,7 +36,5 @@ int printk(uint16_t log_level, const char *string) {
         default:
             terminal_write_buffer(string);
     }
-
-    terminal_write_buffer("\n");
     return (0);
 }
