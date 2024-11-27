@@ -26,3 +26,10 @@ void terminal_write_buffer(const char* data)
 	for (size_t i = 0; i < size; i++)
 		terminal_putchar(data[i]);
 }
+
+void terminal_backspace() {
+
+    move_cursor_back();
+    terminal_putchar(' ');
+    move_cursor_back();
+}

@@ -17,7 +17,12 @@ void handle_keyboard()
 		if(inb(0x60) != c) // PORT FROM WHICH WE READ
 		{
 			c = inb(0x60);
-			if (c > 0)
+
+			// Check if the key is backspace
+			if (c == 0x0E) {
+				terminal_backspace(); // Erase last character and move cursor back
+			}
+			else if (c > 0)
 			{
 				terminal_putinput(c & 0x7F); // print on screen
 			}

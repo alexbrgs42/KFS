@@ -33,6 +33,26 @@ void    update_cursor(bool line_break) {
 	outb(0x3D5, (uint8_t) ((pos >> 8) & 0xFF)); // we write the new y position of the cursor
 }
 
+void move_cursor_back() {
+    
+    if (terminal_column == 0) {
+        if (terminal_row != 0) {
+            terminal_row--;
+            terminal_column = VGA_WIDTH;
+        }
+    }
+    else {
+        terminal_column--;
+    }
+
+    uint16_t pos = terminal_row * VGA_WIDTH + terminal_column;
+
+	outb(0x3D4, 0x0F); // 0x3D4 is a port that selects a screen's register, which is 0x0F (x position of cursor)
+	outb(0x3D5, (uint8_t) (pos & 0xFF)); // 0x3D5 is a port that reads/writes to the selected register, we write the new x position of the cursor
+	outb(0x3D4, 0x0E); // we select 0X0E register (y position of cursor)
+	outb(0x3D5, (uint8_t) ((pos >> 8) & 0xFF)); // we write the new y position of the cursor
+}
+
 void enable_cursor(uint8_t cursor_start, uint8_t cursor_end)
 {
 	outb(0x3D4, 0x0A);
