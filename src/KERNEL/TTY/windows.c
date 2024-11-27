@@ -1,6 +1,6 @@
 #include "../../INCL/tty.h"
 
-void    clear_buffer(char *screen_buffer) {
+void    clear_buffer(uint16_t *screen_buffer) {
 
     for (size_t y = 0; y < VGA_HEIGHT; y++) {
 		for (size_t x = 0; x < VGA_WIDTH; x++) {
@@ -10,7 +10,7 @@ void    clear_buffer(char *screen_buffer) {
 	}
 }
 
-void load_buffer(char *screen_buffer) {
+void load_buffer(uint16_t *screen_buffer) {
 
     for (int y = 0; y < 25; y ++) {
         for (int x = 0; x < 80; x ++) {
@@ -18,6 +18,13 @@ void load_buffer(char *screen_buffer) {
 			terminal_buffer[index] = screen_buffer[index];
         }
     }
+}
+
+void update_buffer(uint16_t *screen_buffer) {
+    
+    const size_t index = terminal_row * VGA_WIDTH + terminal_column;
+
+    screen_buffer[index] = terminal_buffer[index];
 }
 
 //TODO : allows user to change windows with keyboard input
