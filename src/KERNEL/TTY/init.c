@@ -14,8 +14,11 @@ void terminal_initialize(void)
 
     // Empty all screen buffers :
     clear_buffer(screen_buffer_a);
+	cursor_pos_a = 0;
     clear_buffer(screen_buffer_b);
+	cursor_pos_b = 0;
     clear_buffer(screen_buffer_c);
+	cursor_pos_c = 0;
 
     // Load the first buffer
     load_buffer(screen_buffer_a);

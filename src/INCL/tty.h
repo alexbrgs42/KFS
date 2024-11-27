@@ -18,8 +18,11 @@ extern uint8_t		terminal_color;						/* color of the text of the terminal */
 extern uint16_t*	terminal_buffer;					/* vga buffer for writing on the terminal */
 
 static uint16_t     screen_buffer_a[2000];
+static uint16_t		cursor_pos_a;
 static uint16_t     screen_buffer_b[2000];
+static uint16_t		cursor_pos_b;
 static uint16_t     screen_buffer_c[2000];
+static uint16_t		cursor_pos_c;
 
 static uint16_t *   current_screen_buffer;
 

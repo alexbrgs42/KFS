@@ -22,6 +22,15 @@ void handle_keyboard()
 			if (c == 0x0E) {
 				terminal_backspace(); // Erase last character and move cursor back
 			}
+			else if (c == 0x01) {
+				switch_buffer(screen_buffer_a);
+			}
+			else if (c == 0x02) {
+				switch_buffer(screen_buffer_b);
+			}
+			else if (c == 0x03) {
+				switch_buffer(screen_buffer_c);
+			}
 			else if (c > 0)
 			{
 				terminal_putinput(c & 0x7F); // print on screen
