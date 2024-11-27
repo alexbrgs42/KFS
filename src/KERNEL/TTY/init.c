@@ -1,6 +1,6 @@
 #include "../../INCL/tty.h"
 
-/*  */
+/* x86 Real Mode Memory Map : 0x000B8000 - 0x000BFFFF - Color Video Memory */
 
 /// @brief Initializes the terminal by initializing its associated global variables
 // 			and displaying the space char for every characters to display an empty terminal.

@@ -13,4 +13,5 @@ void kernel_main(void)
 
 	/* Newline support is left as an exercise. */
 	printk(0, "Hello from printk");
+	handle_keyboard();
 }

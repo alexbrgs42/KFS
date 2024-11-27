@@ -65,4 +65,6 @@ void    update_cursor(bool line_break);
 void    clear_buffer(char *screen_buffer);
 void    load_buffer(char *screen_buffer);
 
+void	handle_keyboard();
+
 #endif
