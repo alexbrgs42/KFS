@@ -17,8 +17,8 @@ void    update_cursor(bool line_break) {
         }
     }
 
-    if (terminal_row == VGA_HEIGHT - 1) {
-        terminal_row = 1;
+    if (terminal_row == VGA_HEIGHT) {
+        terminal_row = 0;
     }
 
     // Updates the blinking cursor position
