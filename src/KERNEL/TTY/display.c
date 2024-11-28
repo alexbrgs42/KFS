@@ -27,7 +27,8 @@ void terminal_write_buffer(const char* data)
 		terminal_putchar(data[i]);
 }
 
-void terminal_backspace() {
+/// @brief    Erase the last character (replace by space)
+void terminal_backspace(void) {
 
     move_cursor_back();
     terminal_putchar(' ');

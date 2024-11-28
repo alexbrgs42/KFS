@@ -1,5 +1,7 @@
 #include "../../INCL/tty.h"
 
+/// @brief                  Replace all content of a buffer by spaces
+/// @param screen_buffer    The buffer to clear
 void    clear_buffer(uint16_t *screen_buffer) {
 
     for (size_t y = 0; y < VGA_HEIGHT; y++) {
@@ -10,6 +12,8 @@ void    clear_buffer(uint16_t *screen_buffer) {
 	}
 }
 
+/// @brief                  Loads the screen buffer into the terminal buffer (what is actually shown)
+/// @param screen_buffer    The buffer to load from
 void load_buffer(uint16_t *screen_buffer) {
 
     for (int y = 0; y < 25; y ++) {
@@ -20,6 +24,8 @@ void load_buffer(uint16_t *screen_buffer) {
     }
 }
 
+/// @brief                  Saves into the buffer what is on screen
+/// @param screen_buffer    The buffer to save in, will mostly be current_screen_buffer
 void update_buffer(uint16_t *screen_buffer) {
     
     const size_t index = terminal_row * VGA_WIDTH + terminal_column;
@@ -27,6 +33,8 @@ void update_buffer(uint16_t *screen_buffer) {
     screen_buffer[index] = terminal_buffer[index];
 }
 
+/// @brief                  Switch from the current buffer to another
+/// @param screen_buffer    The buffer to switch to
 void switch_buffer(uint16_t *screen_buffer) {
 
     if (current_screen_buffer == screen_buffer) {

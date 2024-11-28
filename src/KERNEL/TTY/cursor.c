@@ -33,7 +33,8 @@ void    update_cursor(bool line_break) {
 	outb(0x3D5, (uint8_t) ((pos >> 8) & 0xFF)); // we write the new y position of the cursor
 }
 
-void move_cursor_back() {
+/// @brief   Moves the cursor back from one column or row if we're at col 0
+void move_cursor_back(void) {
     
     if (terminal_column == 0) {
         if (terminal_row != 0) {
@@ -53,6 +54,9 @@ void move_cursor_back() {
 	outb(0x3D5, (uint8_t) ((pos >> 8) & 0xFF)); // we write the new y position of the cursor
 }
 
+/// @brief                  Enable showing of blinking cursor
+/// @param cursor_start     Change how large the cursor is
+/// @param cursor_end       //
 void enable_cursor(uint8_t cursor_start, uint8_t cursor_end)
 {
 	outb(0x3D4, 0x0A);

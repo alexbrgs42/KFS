@@ -1,6 +1,11 @@
 #include "../INCL/libc.h"
 #include "../INCL/tty.h"
 
+
+/// @brief              printf-like function that also accepts a log-level
+/// @param log_level    How important the message is, 0 will only display the string
+/// @param string       String to print
+/// @return             0, TODO: 1 for error
 int printk(uint16_t log_level, const char *string) {
 
     switch (log_level) {

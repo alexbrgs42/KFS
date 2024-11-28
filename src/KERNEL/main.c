@@ -18,6 +18,7 @@ void kernel_main(void)
 	handle_keyboard();
 }
 
+/// @brief                  Displays mandatory 42 mention
 void print_welcome_screen(void) {
 
 	terminal_set_color(VGA_COLOR_CYAN);
