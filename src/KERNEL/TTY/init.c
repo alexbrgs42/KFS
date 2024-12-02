@@ -30,6 +30,5 @@ void terminal_initialize(void)
 	// 		terminal_buffer[index] = vga_entry(' ', terminal_color);
 	// 	}
 	// }
-
     enable_cursor(0x0A, 0x0C);
 }

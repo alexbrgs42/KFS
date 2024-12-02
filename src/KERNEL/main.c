@@ -33,6 +33,8 @@ void print_welcome_screen(void) {
 	printk(0, "/*                                                   ###   ########.fr       */\n");
 	printk(0, "/* ************************************************************************* */\n");
 
-
 	terminal_set_color(VGA_COLOR_WHITE);
+
+	printk(0, "$>");
+	printk(0, (char *) screen_buffer_a);
 }
