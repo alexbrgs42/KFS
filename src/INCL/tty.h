@@ -17,15 +17,6 @@ extern size_t		terminal_column;					/* column of the cursor of the terminal */
 extern uint8_t		terminal_color;						/* color of the text of the terminal */
 extern uint16_t*	terminal_buffer;					/* vga buffer for writing on the terminal */
 
-static uint16_t     screen_buffer_a[2000];
-static uint16_t		cursor_pos_a;
-static uint16_t     screen_buffer_b[2000];
-static uint16_t		cursor_pos_b;
-static uint16_t     screen_buffer_c[2000];
-static uint16_t		cursor_pos_c;
-
-static uint16_t *   current_screen_buffer;
-
 /**********************************************************************************/
 /*                                     COLORS                                     */
 /**********************************************************************************/
@@ -65,10 +56,10 @@ uint16_t vga_entry(unsigned char uc, uint8_t color);
 
 void    enable_cursor(uint8_t cursor_start, uint8_t cursor_end);
 void    update_cursor(bool line_break);
+void    update_blinking_cursor(void);
 
+void    scroll_buffer(void);
 void    clear_buffer(uint16_t *screen_buffer);
-void    load_buffer(uint16_t *screen_buffer);
-void 	update_buffer(uint16_t *screen_buffer);
 
 void	handle_keyboard();
 
