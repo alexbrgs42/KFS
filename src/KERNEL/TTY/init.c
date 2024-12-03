@@ -13,6 +13,7 @@ void terminal_initialize(void)
 	terminal_buffer = (uint16_t*) 0xB8000;
 
     clear_buffer(terminal_buffer);
+    clear_command_buffer();
 
     enable_cursor(0x0A, 0x0C);
 }

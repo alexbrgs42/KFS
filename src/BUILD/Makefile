@@ -3,6 +3,7 @@
 KERNEL_SRCS	=	../KERNEL/main.c \
 				../KERNEL/TTY/color.c ../KERNEL/TTY/display.c ../KERNEL/TTY/init.c \
 				../KERNEL/TTY/vga.c ../KERNEL/TTY/cursor.c ../KERNEL/TTY/windows.c \
+				../KERNEL/TTY/command.c \
 				../KERNEL/KEYBOARD/input.c
 
 # ---------------------------------------------------------------------------- #

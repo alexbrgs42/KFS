@@ -23,32 +23,28 @@ void handle_keyboard()
 			if (c == KEYCODE_BACKSPACE) {
 				terminal_backspace(); 								// Erase last character and move cursor back
 			}
-            else if (c == KEYCODE_CTRL_L || c == KEYCODE_CTRL_R) {
-                if (c & 0x80) {  									// 0x80 is the break code, meaning key release
-                    ctrl_pressed = false;
-                } else {
-                    ctrl_pressed = true;  							// Set ctrl_pressed to true when Ctrl key is pressed
-                }
-            }
-			// TODO
-			// else if (c == KEYCODE_1 && ctrl_pressed) {
-			// 	switch_buffer(screen_buffer_a);
-			// }
-			// else if (c == KEYCODE_2 && ctrl_pressed) {
-			// 	switch_buffer(screen_buffer_b);
-			// }
-			// else if (c == KEYCODE_3 && ctrl_pressed) {
-			// 	switch_buffer(screen_buffer_c);
-			// }
-			else if (c > 0)
-			{
+            else if (c == KEYCODE_ENTER) {
+                    check_for_builtin();
+                    printk(0, "\n$>");
+                    clear_command_buffer();
+			}
+			else if (c > 0) {
 				terminal_putinput(c & 0x7F);
-				if (c == KEYCODE_ENTER) {
-					printk(0, "$>");
-					//TODO : Check if content entered is a command
-				}
 			}
 		}
 	}
 	while (c != 1); // 1 = ESCAPE
 }
+
+
+// TODO : Code to handle ctrl + key events, but seems to need interrupts to work
+// else if (c == KEYCODE_CTRL_L || c == KEYCODE_CTRL_R) {
+//     if (c & 0x80) {  									// 0x80 is the break code, meaning key release
+//         ctrl_pressed = false;
+//     } else {
+//         ctrl_pressed = true;  							// Set ctrl_pressed to true when Ctrl key is pressed
+//     }
+// }
+// else if (c == KEYCODE_L && ctrl_pressed) {
+// 	switch_buffer(screen_buffer_a);
+// }

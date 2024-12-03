@@ -17,6 +17,9 @@ extern size_t		terminal_column;					/* column of the cursor of the terminal */
 extern uint8_t		terminal_color;						/* color of the text of the terminal */
 extern uint16_t*	terminal_buffer;					/* vga buffer for writing on the terminal */
 
+//TODO : once memory is configured, malloc the required size only
+static char         command_buffer[1024];
+
 /**********************************************************************************/
 /*                                     COLORS                                     */
 /**********************************************************************************/
@@ -46,10 +49,15 @@ typedef enum vga_color vga_color;
 /*                                   PROTOTYPES                                   */
 /**********************************************************************************/
 
+void    clear_command_buffer(void);
+void    append_to_command_buffer(char c);
+void    check_for_builtin(void);
+
 void	terminal_initialize(void);
 void	terminal_set_color(uint8_t color);
 void	terminal_write_buffer(const char* data);
 void	terminal_putentryat(char c, uint8_t color, size_t x, size_t y);
+void    terminal_backspace(void);
 
 uint8_t vga_entry_color(vga_color fg, vga_color bg);
 uint16_t vga_entry(unsigned char uc, uint8_t color);
