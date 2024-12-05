@@ -7,7 +7,7 @@
 void    update_cursor(bool line_break) {
 
     if (line_break == true) {
-        if (terminal_row == VGA_HEIGHT - 1) {
+        if (terminal_row == VGA_HEIGHT - 2) {
             scroll_buffer();
         } 
         else {
@@ -18,7 +18,7 @@ void    update_cursor(bool line_break) {
     else {
         terminal_column++;
         if (terminal_column == VGA_WIDTH) {
-            if (terminal_row == VGA_HEIGHT - 1) {
+            if (terminal_row == VGA_HEIGHT - 2) {
                 scroll_buffer();
             } 
             else { 

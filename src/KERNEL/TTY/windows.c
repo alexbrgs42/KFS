@@ -3,12 +3,12 @@
 /// @brief Moves all content of the buffer up one row
 void scroll_buffer(void) {
     // Shift all rows up by one
-    for (unsigned int i = 0; i < (VGA_HEIGHT - 1) * VGA_WIDTH; i++) {
+    for (unsigned int i = 0; i < (VGA_HEIGHT - 2) * VGA_WIDTH; i++) {
         terminal_buffer[i] = terminal_buffer[i + VGA_WIDTH];
     }
 
     // Clear the last row (bottom-most row of the screen)
-    for (unsigned int i = (VGA_HEIGHT - 1) * VGA_WIDTH; i < VGA_HEIGHT * VGA_WIDTH; i++) {
+    for (unsigned int i = (VGA_HEIGHT - 2) * VGA_WIDTH; i < (VGA_HEIGHT - 1) * VGA_WIDTH; i++) {
         terminal_buffer[i] = vga_entry(' ', terminal_color);
     }
 }

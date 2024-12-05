@@ -11,7 +11,7 @@ void    clear_command_buffer(void) {
 
 /// @brief      Adds c at the end of the command_buffer
 /// @param c    Any char written to the terminal
-void    append_to_command_buffer(unsigned char c) {
+void    append_to_command_buffer(char c) {
 
     char a = get_char_from_input(c);
 

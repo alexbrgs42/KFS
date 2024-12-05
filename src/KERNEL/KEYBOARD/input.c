@@ -3,11 +3,11 @@
 #include "../../INCL/libc.h"
 #include "../../INCL/keyboard.h"
 
-char get_char_from_input(unsigned char c) {
+char get_char_from_input(char c) {
 	return (scan_codes[(uint16_t) c]);
 }
 
-void terminal_putinput(unsigned char c)
+void terminal_putinput(char c)
 {
 	char a = get_char_from_input(c);
     terminal_write_buffer(&a);
@@ -42,16 +42,3 @@ void handle_keyboard()
 	}
 	while (c != 1); // 1 = ESCAPE
 }
-
-
-// TODO : Code to handle ctrl + key events, but seems to need interrupts to work
-// else if (c == KEYCODE_CTRL_L || c == KEYCODE_CTRL_R) {
-//     if (c & 0x80) {  									// 0x80 is the break code, meaning key release
-//         ctrl_pressed = false;
-//     } else {
-//         ctrl_pressed = true;  							// Set ctrl_pressed to true when Ctrl key is pressed
-//     }
-// }
-// else if (c == KEYCODE_L && ctrl_pressed) {
-// 	switch_buffer(screen_buffer_a);
-// }

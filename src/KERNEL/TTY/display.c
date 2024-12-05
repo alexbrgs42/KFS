@@ -21,8 +21,9 @@ void terminal_putchar(char c)
 void terminal_write_buffer(const char* data)
 {
 	size_t size = strlen(data);
-	for (size_t i = 0; i < size; i++)
-		terminal_putchar(data[i]);
+	for (size_t i = 0; i < size; i++) {
+        terminal_putchar(data[i]);
+    }
 }
 
 /// @brief    Erase the last character (replace by space)
