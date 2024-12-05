@@ -14,7 +14,6 @@ void terminal_putchar(char c)
     }
     else {
         terminal_putentryat(c, terminal_color, terminal_column, terminal_row);
-        append_to_command_buffer(c);
         update_cursor(false);
     }
 }

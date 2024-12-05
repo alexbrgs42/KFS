@@ -50,7 +50,8 @@ typedef enum vga_color vga_color;
 /**********************************************************************************/
 
 void    clear_command_buffer(void);
-void    append_to_command_buffer(char c);
+void    append_to_command_buffer(unsigned char c);
+void    remove_from_command_buffer(uint16_t count);
 void    check_for_builtin(void);
 
 void	terminal_initialize(void);
@@ -59,16 +60,20 @@ void	terminal_write_buffer(const char* data);
 void	terminal_putentryat(char c, uint8_t color, size_t x, size_t y);
 void    terminal_backspace(void);
 
+void 	print_welcome_screen(void);
+
 uint8_t vga_entry_color(vga_color fg, vga_color bg);
 uint16_t vga_entry(unsigned char uc, uint8_t color);
 
 void    enable_cursor(uint8_t cursor_start, uint8_t cursor_end);
 void    update_cursor(bool line_break);
+void 	move_cursor_back(void); 
 void    update_blinking_cursor(void);
 
 void    scroll_buffer(void);
 void    clear_buffer(uint16_t *screen_buffer);
 
+char 	get_char_from_input(unsigned char c);
 void	handle_keyboard();
 
 #endif

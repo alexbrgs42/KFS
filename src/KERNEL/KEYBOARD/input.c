@@ -3,9 +3,13 @@
 #include "../../INCL/libc.h"
 #include "../../INCL/keyboard.h"
 
+char get_char_from_input(unsigned char c) {
+	return (scan_codes[(uint16_t) c]);
+}
+
 void terminal_putinput(unsigned char c)
 {
-	char a = scan_codes[(uint16_t) c];
+	char a = get_char_from_input(c);
     terminal_write_buffer(&a);
 }
 
@@ -22,14 +26,17 @@ void handle_keyboard()
 
 			if (c == KEYCODE_BACKSPACE) {
 				terminal_backspace(); 								// Erase last character and move cursor back
+				remove_from_command_buffer(1);
 			}
             else if (c == KEYCODE_ENTER) {
+					printk(0, "\n");
                     check_for_builtin();
-                    printk(0, "\n$>");
+                    printk(0, "$>");
                     clear_command_buffer();
 			}
 			else if (c > 0) {
 				terminal_putinput(c & 0x7F);
+				append_to_command_buffer(c & 0x7F);
 			}
 		}
 	}
