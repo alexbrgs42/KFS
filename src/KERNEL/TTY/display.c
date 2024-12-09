@@ -5,15 +5,21 @@ void terminal_putentryat(char c, uint8_t color, size_t x, size_t y)
 {
 	const size_t index = y * VGA_WIDTH + x;
 	terminal_buffer[index] = vga_entry(c, color);
+
+    //Also save in the correct window's memory
+    size_t virtual_index = get_offset() + index;
+    *(uint16_t*)virtual_index = vga_entry(c, color);
 }
 
 void terminal_putchar(char c)
 {
+    uint16_t index = current_window - 1;
+
     if (c == '\n') {
         update_cursor(true);
     }
     else {
-        terminal_putentryat(c, terminal_color, terminal_column, terminal_row);
+        terminal_putentryat(c, terminal_color, terminal_column[index], terminal_row[index]);
         update_cursor(false);
     }
 }

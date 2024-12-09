@@ -1,10 +1,11 @@
 #include "../INCL/tty.h"
 #include "../INCL/libc.h"
 
-size_t		terminal_row;
-size_t		terminal_column;
+size_t		terminal_row[3];
+size_t		terminal_column[3];
 uint8_t		terminal_color;
 uint16_t*	terminal_buffer;
+uint16_t	current_window;
 
 void kernel_main(void) 
 {

@@ -9,13 +9,18 @@
 /*                                GLOBAL VARIABLES                                */
 /**********************************************************************************/
 
+# define WINDOW1_BASE 0xBA000
+# define WINDOW2_BASE 0xBC000
+# define WINDOW3_BASE 0xBE000
+
 static const size_t VGA_WIDTH = 80;						/* vga format */
 static const size_t VGA_HEIGHT = 25;
 
-extern size_t		terminal_row;						/* row of the cursor of the terminal */
-extern size_t		terminal_column;					/* column of the cursor of the terminal */
+extern size_t		terminal_row[3];					/* row of the cursor of the terminal in the different windows */
+extern size_t		terminal_column[3];					/* column of the cursor of the terminal in the different windows */
 extern uint8_t		terminal_color;						/* color of the text of the terminal */
 extern uint16_t*	terminal_buffer;					/* vga buffer for writing on the terminal */
+extern uint16_t 	current_window;						/* indicates which terminal window we're on */
 
 //TODO : once memory is configured, malloc the required size only
 static char         command_buffer[1024];
@@ -60,7 +65,7 @@ void	terminal_write_buffer(const char* data);
 void	terminal_putentryat(char c, uint8_t color, size_t x, size_t y);
 void    terminal_backspace(void);
 
-void 	print_info_line(uint16_t window_num);
+void 	print_info_line(void);
 void 	print_welcome_screen(void);
 
 uint8_t vga_entry_color(vga_color fg, vga_color bg);
@@ -71,8 +76,10 @@ void    update_cursor(bool line_break);
 void 	move_cursor_back(void); 
 void    update_blinking_cursor(void);
 
-void    scroll_buffer(void);
-void    clear_buffer(uint16_t *screen_buffer);
+uint16_t get_offset(void);
+void 	 switch_window(uint16_t new_window);
+void     scroll_buffer(void);
+void     clear_buffer(uint16_t *screen_buffer);
 
 char 	get_char_from_input(char c);
 void	handle_keyboard();
