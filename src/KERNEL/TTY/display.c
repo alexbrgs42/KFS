@@ -8,7 +8,7 @@ void terminal_putentryat(char c, uint8_t color, size_t x, size_t y)
 
     //Also save in the correct window's memory
     size_t virtual_index = get_offset() + index;
-    *(uint16_t*)virtual_index = vga_entry(c, color);
+    *((volatile uint16_t*)virtual_index) = vga_entry(c, color);
 }
 
 void terminal_putchar(char c)

@@ -18,7 +18,8 @@ void switch_window(uint16_t new_window) {
     for (uint16_t i = 0; i < VGA_HEIGHT; i ++) {
         for (uint16_t j = 0; j < VGA_WIDTH; j++) {
             size_t index = i * VGA_WIDTH + j;
-            terminal_buffer[index] = terminal_buffer[index + offset];
+            // Get the address for the current window and write to it
+            terminal_buffer[index] = *((uint16_t*)(offset + index));
         }
     }
 }

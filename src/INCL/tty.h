@@ -9,9 +9,9 @@
 /*                                GLOBAL VARIABLES                                */
 /**********************************************************************************/
 
-# define WINDOW1_BASE 0xBA000
-# define WINDOW2_BASE 0xBC000
-# define WINDOW3_BASE 0xBE000
+# define WINDOW1_BASE 0xB9000
+# define WINDOW2_BASE 0xB9F82
+# define WINDOW3_BASE 0xBA4F3
 
 static const size_t VGA_WIDTH = 80;						/* vga format */
 static const size_t VGA_HEIGHT = 25;
