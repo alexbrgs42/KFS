@@ -65,7 +65,7 @@ void    terminal_backspace(void);
 
 void 	clear_and_prepare_buffers(void);
 void 	print_info_line(void);
-void 	print_welcome_screen(void);
+void 	print_welcome_screen(uint8_t color);
 
 uint8_t vga_entry_color(vga_color fg, vga_color bg);
 uint16_t vga_entry(unsigned char c, uint8_t color);

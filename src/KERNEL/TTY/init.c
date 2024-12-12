@@ -40,17 +40,19 @@ void clear_and_prepare_buffers(void) {
 	switch_window(2);
 	clear_command_buffer();
 	print_info_line();
+	print_welcome_screen(VGA_COLOR_LIGHT_RED);
 	printk(0, "$>");
 
 	switch_window(3);
 	clear_command_buffer();
 	print_info_line();
+	print_welcome_screen(VGA_COLOR_GREEN);
 	printk(0, "$>");
 
 	switch_window(1);
 	clear_command_buffer();
 	print_info_line();
-	print_welcome_screen();
+	print_welcome_screen(VGA_COLOR_CYAN);
 	printk(0, "$>");
 }
 
@@ -104,9 +106,9 @@ void print_info_line(void) {
 }
 
 /// @brief                  Displays mandatory 42 mention
-void print_welcome_screen(void) {
+void print_welcome_screen(uint8_t color) {
 
-	terminal_set_color(VGA_COLOR_CYAN);
+	terminal_set_color(color);
 
 	printk(0, "/* ************************************************************************* */\n");
 	printk(0, "/*                                                       :::      ::::::::   */\n");
