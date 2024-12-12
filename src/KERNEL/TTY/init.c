@@ -21,22 +21,46 @@ void terminal_initialize(void)
 
 	current_window = 1;
 
-	clear_buffer(terminal_buffer);
-    clear_buffer((uint16_t*) WINDOW1_BASE);
-	clear_buffer((uint16_t*) WINDOW2_BASE);
-	clear_buffer((uint16_t*) WINDOW3_BASE);
-    clear_command_buffer();
+	clear_and_prepare_buffers();
 
-	print_info_line();
+    clear_command_buffer();
 
     enable_cursor(0x0A, 0x0C);
 }
 
+void clear_and_prepare_buffers(void) {
+
+	// Make sure our buffers memory is clear
+	clear_buffer(terminal_buffer);
+    clear_buffer(terminal_windows[0]);
+	clear_buffer(terminal_windows[1]);
+	clear_buffer(terminal_windows[2]);
+	
+	// For each window, clear the command buffer and print the info line and the prompt
+	switch_window(2);
+	clear_command_buffer();
+	print_info_line();
+	printk(0, "$>");
+
+	switch_window(3);
+	clear_command_buffer();
+	print_info_line();
+	printk(0, "$>");
+
+	switch_window(1);
+	clear_command_buffer();
+	print_info_line();
+	print_welcome_screen();
+	printk(0, "$>");
+}
+
+/// @brief Prints the info line at the bottom of the screen indicating which window we're on
 void print_info_line(void) {
 
     uint16_t index = current_window - 1;   	
 
-	size_t	tmp = terminal_row[index];
+	size_t	row_tmp = terminal_row[index];
+	size_t	col_tmp = terminal_column[index];
 	terminal_row[index] = VGA_HEIGHT - 1;
 	terminal_column[index] = 0;
 
@@ -73,8 +97,8 @@ void print_info_line(void) {
 	}
 	printk(0, "/___");
 
-	terminal_row[index] = tmp;
-	terminal_column[index] = 0;
+	terminal_row[index] = row_tmp;
+	terminal_column[index] = col_tmp;
 
 	terminal_set_color(VGA_COLOR_WHITE);
 }
@@ -95,6 +119,4 @@ void print_welcome_screen(void) {
 	printk(0, "/* ************************************************************************* */\n");
 
 	terminal_set_color(VGA_COLOR_WHITE);
-
-	printk(0, "$>");
 }

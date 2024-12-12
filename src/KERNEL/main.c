@@ -7,12 +7,12 @@ uint8_t		terminal_color;
 uint16_t*	terminal_buffer;
 uint16_t	current_window;
 
+uint16_t	terminal_windows[3][2000];
+
 void kernel_main(void) 
 {
 	/* Initialize terminal interface */
 	terminal_initialize();
 
-	/* Newline support is left as an exercise. */
-	print_welcome_screen();
 	handle_keyboard();
 }

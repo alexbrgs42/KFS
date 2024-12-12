@@ -11,30 +11,16 @@ void switch_window(uint16_t new_window) {
     current_window = new_window;
 
     clear_buffer(terminal_buffer);
-    clear_command_buffer();
-
-    uint16_t offset = get_offset();
 
     for (uint16_t i = 0; i < VGA_HEIGHT; i ++) {
         for (uint16_t j = 0; j < VGA_WIDTH; j++) {
             size_t index = i * VGA_WIDTH + j;
             // Get the address for the current window and write to it
-            terminal_buffer[index] = *((uint16_t*)(offset + index));
+            terminal_buffer[index] = terminal_windows[current_window - 1][index];
         }
     }
-}
 
-/// @brief  returns the starting address of our different windows
-uint16_t get_offset(void) {
-
-    switch(current_window) {
-        case 1:
-            return (WINDOW1_BASE);
-        case 2:
-            return (WINDOW2_BASE);
-        case 3:
-            return (WINDOW3_BASE);
-    }
+    update_blinking_cursor();
 }
 
 /// @brief Moves all content of the buffer up one row
@@ -42,11 +28,13 @@ void scroll_buffer(void) {
     // Shift all rows up by one
     for (unsigned int i = 0; i < (VGA_HEIGHT - 2) * VGA_WIDTH; i++) {
         terminal_buffer[i] = terminal_buffer[i + VGA_WIDTH];
+        terminal_windows[current_window - 1][i] = terminal_windows[current_window - 1][i + VGA_WIDTH];
     }
 
     // Clear the last row (bottom-most row of the screen)
     for (unsigned int i = (VGA_HEIGHT - 2) * VGA_WIDTH; i < (VGA_HEIGHT - 1) * VGA_WIDTH; i++) {
         terminal_buffer[i] = vga_entry(' ', terminal_color);
+        terminal_windows[current_window - 1][i] = vga_entry(' ', terminal_color);
     }
 }
 

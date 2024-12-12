@@ -5,7 +5,7 @@
 void    clear_command_buffer(void) {
 
     for (int i = 0; i < 1024; i++) {
-        command_buffer[i] = 0;
+        command_buffer[current_window - 1][i] = 0;
     }
 }
 
@@ -17,7 +17,7 @@ void    append_to_command_buffer(char c) {
 
     int i = 0;
 
-    while (i < 1023 && command_buffer[i] != 0) {
+    while (i < 1023 && command_buffer[current_window - 1][i] != 0) {
         i++;
     }
 
@@ -26,7 +26,7 @@ void    append_to_command_buffer(char c) {
         return ;
     }
 
-    command_buffer[i] = a;
+    command_buffer[current_window - 1][i] = a;
 }
 
 /// @brief          Remove count character(s) from command_buffer
@@ -35,13 +35,13 @@ void    remove_from_command_buffer(uint16_t count) {
 
     int i = 0;
 
-    while (i < 1024 && command_buffer[i] != 0) {
+    while (i < 1024 && command_buffer[current_window - 1][i] != 0) {
         i++;
     }
 
     for (int j = 0; j < count; j ++) {
         i--;
-        command_buffer[i] = 0;
+        command_buffer[current_window - 1][i] = 0;
     }
 }
 
@@ -49,10 +49,10 @@ void    remove_from_command_buffer(uint16_t count) {
 // TODO : take arguments into account
 void    check_for_builtin(void) {
 
-    if (strcmp(command_buffer, "hello") == 0) {
+    if (strcmp(command_buffer[current_window - 1], "hello") == 0) {
         printk(0, "Hello there, it's your kernel\n");
     }
-    else if (strcmp(command_buffer, "help") == 0) {
+    else if (strcmp(command_buffer[current_window - 1], "help") == 0) {
         help();
     }
 }

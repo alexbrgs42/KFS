@@ -7,8 +7,7 @@ void terminal_putentryat(char c, uint8_t color, size_t x, size_t y)
 	terminal_buffer[index] = vga_entry(c, color);
 
     //Also save in the correct window's memory
-    size_t virtual_index = get_offset() + index;
-    *((volatile uint16_t*)virtual_index) = vga_entry(c, color);
+    terminal_windows[current_window - 1][index] = vga_entry(c, color);
 }
 
 void terminal_putchar(char c)
@@ -32,6 +31,7 @@ void terminal_write_buffer(const char* data)
     }
 }
 
+//TODO : Make backspace impossible to remove the prompt
 /// @brief    Erase the last character (replace by space)
 void terminal_backspace(void) {
 

@@ -36,15 +36,12 @@ void handle_keyboard()
 			}
 			else if (c == KEYCODE_1) {
 				switch_window(1);
-				print_info_line();
 			}
 			else if (c == KEYCODE_2) {
 				switch_window(2);
-				print_info_line();
 			}
 			else if (c == KEYCODE_3) {
 				switch_window(3);
-				print_info_line();
 			}
 			else if (c > 0) {
 				terminal_putinput(c & 0x7F);
