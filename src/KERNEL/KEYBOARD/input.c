@@ -24,6 +24,14 @@ void handle_keyboard()
 		{
 			c = inb(0x60);
 
+			// Ignore Shift, Ctrl, Alt, and other non-printable keys
+            if (c == KEYCODE_SHIFT_L || c == KEYCODE_SHIFT_R || 
+                c == KEYCODE_CTRL_L || c == KEYCODE_CTRL_R || 
+                c == KEYCODE_ALT_L || c == KEYCODE_ALT_R ||
+				c == KEYCODE_CAPS_LOCK) {
+                continue;
+            }
+
 			if (c == KEYCODE_BACKSPACE) {
 				terminal_backspace(); 								// Erase last character and move cursor back
 				remove_from_command_buffer(1);

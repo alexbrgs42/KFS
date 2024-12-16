@@ -1,7 +1,8 @@
 #include "../../INCL/libc.h"
+#include "../../INCL/tty.h"
 
 /// @brief Builtin command to change which color is used to write to the screen
-/// @param color    Color to change to, needs to be parsed beforehand to avoid check
+/// @param color  Name of the collor to witch to
 void color_change(char *color) {
 
     if (!strcmp(color, "red")) {

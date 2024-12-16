@@ -22,6 +22,9 @@ extern uint16_t		terminal_windows[3][2000];
 
 //TODO : once memory is configured, malloc the required size only
 static char         command_buffer[3][1024];
+static char			split_command[512];
+static char			split_arg1[256];
+static char			split_arg2[256];
 
 /**********************************************************************************/
 /*                                     COLORS                                     */
@@ -55,6 +58,7 @@ typedef enum vga_color vga_color;
 void    clear_command_buffer(void);
 void    append_to_command_buffer(char c);
 void    remove_from_command_buffer(uint16_t count);
+void    split_command_and_args(void);
 void    check_for_builtin(void);
 
 void	terminal_initialize(void);
