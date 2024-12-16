@@ -3,5 +3,7 @@
 
 void help(void);
 void color_change(char *color);
+void reboot(void);
+
 
 #endif
