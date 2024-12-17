@@ -67,7 +67,7 @@ void split_command_and_args(void) {
 
   int i = 0;
 
-  while (i < 511) {
+  while (i < 512) {
     if (command_buffer[current_window - 1][i] == 0 ||
         command_buffer[current_window - 1][i] == ' ') {
       break;
@@ -101,7 +101,6 @@ void split_command_and_args(void) {
 
 /// @brief  Will attempt to match command_buffer and a builtin, if it exists,
 /// execute it
-// TODO : take arguments into account
 void check_for_builtin(void) {
 
   clear_command_and_args();

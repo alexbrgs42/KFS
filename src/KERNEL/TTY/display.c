@@ -28,7 +28,7 @@ void terminal_write_buffer(const char *data) {
   }
 }
 
-// TODO : Make backspace impossible to remove the prompt
+//TODO : Make it unable to move past the prompt
 /// @brief    Erase the last character (replace by space)
 void terminal_backspace(void) {
 

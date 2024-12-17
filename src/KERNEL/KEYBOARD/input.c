@@ -2,6 +2,7 @@
 #include "../../INCL/keyboard.h"
 #include "../../INCL/libc.h"
 #include "../../INCL/tty.h"
+#include "../../INCL/builtins.h"
 
 char get_char_from_input(char c) { return (scan_codes[(uint16_t)c]); }
 
@@ -32,8 +33,8 @@ void handle_keyboard() {
       } else if (c == KEYCODE_ENTER) {
         printk(0, "\n");
         check_for_builtin();
-        printk(0, "$>");
         clear_command_buffer();
+        printk(0, "$>");
       } else if (c == KEYCODE_1) {
         switch_window(1);
       } else if (c == KEYCODE_2) {
@@ -46,4 +47,6 @@ void handle_keyboard() {
       }
     }
   } while (c != 1); // 1 = ESCAPE
+
+  reboot();
 }
