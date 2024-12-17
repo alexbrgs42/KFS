@@ -114,5 +114,8 @@ void check_for_builtin(void) {
     color_change(split_arg1);
   } else if (strcmp(split_command, "reboot") == 0) {
     reboot();
+  } else if (strcmp(split_command, "halt") == 0) {
+    halt();
   }
 }
+

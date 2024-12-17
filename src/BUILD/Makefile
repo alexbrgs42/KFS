@@ -6,7 +6,7 @@ KERNEL_SRCS	=	../KERNEL/main.c \
 				../KERNEL/TTY/command.c \
 				../KERNEL/KEYBOARD/input.c \
 				../KERNEL/BUILTINS/help.c ../KERNEL/BUILTINS/color_change.c \
-				../KERNEL/BUILTINS/reboot.c
+				../KERNEL/BUILTINS/reboot.c ../KERNEL/BUILTINS/halt.c
 
 # ---------------------------------------------------------------------------- #
 
