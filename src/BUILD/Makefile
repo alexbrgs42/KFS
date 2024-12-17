@@ -17,9 +17,21 @@ LIBS_SRCS	=	../LIBS/LIBC/printk.c \
 
 # ---------------------------------------------------------------------------- #
 
+C_BUILD_SRCS = ../CONF/gdt.c
+
+# ---------------------------------------------------------------------------- #
+
+ASM_SRCS = ../CONF/gdt_asm.asm ../CONF/boot.asm
+
+# ---------------------------------------------------------------------------- #
+
 KERNEL_OBJS	=	$(KERNEL_SRCS:.c=.o)
 
 LIBS_OBJS	=	$(LIBS_SRCS:.c=.o)
+
+C_BUILD_OBJS	=	$(C_BUILD_SRCS:.c=.o)
+
+ASM_OBJS	=	$(ASM_SRCS:.asm=.o)
 
 # ---------------------------------------------------------------------------- #
 
@@ -45,16 +57,21 @@ COLOR_END	=	\033[0m
 	@$(CLANG) $(TARGET) $(FLAGS) -I $(INCL) -c $< -o $@
 	@echo "$(COLOR_BLUE) || Compiling ($<)...$(COLOR_END)"
 
+%.o: %.asm
+	@$(CLANG) $(TARGET) -c ../CONF/boot.asm -o ../CONF/boot.o
+	nasm -f elf32 ../CONF/gdt_asm.asm -o ../CONF/gdt_asm.o
+	@echo "$(COLOR_BLUE) || Compiling ($<)...$(COLOR_END)"
+
 all: $(NAME)
 
-$(NAME): $(KERNEL_OBJS) $(LIBS_OBJS)
-	@$(CLANG) $(TARGET) -T ../CONF/linker.ld -I $(INCL) -o $(NAME) -ffreestanding -O2 -nostdlib ../../boot.o $(LIBS_OBJS) $(KERNEL_OBJS) 
+$(NAME): $(KERNEL_OBJS) $(LIBS_OBJS) $(C_BUILD_OBJS) $(ASM_OBJS)
+	@$(CLANG) $(TARGET) -T ../CONF/linker.ld -I $(INCL) -o $(NAME) -ffreestanding -O2 -nostdlib $(ASM_OBJS) $(LIBS_OBJS) $(C_BUILD_OBJS) $(KERNEL_OBJS) 
 	@echo "$(COLOR_GREEN) || Done !$(COLOR_END)"
 
 # ---------------------------------------------------------------------------- #
 
 clean:
-	@rm -rf $(KERNEL_OBJS) $(LIBS_OBJS)
+	@rm -rf $(KERNEL_OBJS) $(LIBS_OBJS) $(C_BUILD_OBJS) $(ASM_OBJS)
 	@echo "$(COLOR_RED) || Cleaning files...$(COLOR_END)"
 
 fclean: clean

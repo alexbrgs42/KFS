@@ -7,11 +7,11 @@ RUN apt update && apt upgrade -y && apt install -y \
     gcc \
     grub2-common \
     xorriso \
+    nasm \
     grub-pc-bin 
 
 COPY . .
 
-RUN clang --target=i386-unknown-none -c /src/CONF/boot.asm -o boot.o
 RUN make -C /src/BUILD
 
 RUN mkdir -p isodir/boot/grub

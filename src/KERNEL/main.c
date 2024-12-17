@@ -12,6 +12,7 @@ uint16_t terminal_windows[3][2000];
 void kernel_main(void) {
   /* Initialize terminal interface */
   terminal_initialize();
+  init_gdt();
 
   handle_keyboard();
 }
