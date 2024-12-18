@@ -1,3 +1,5 @@
+#include "../../INCL/libc.h"
+
 void halt(void) {
 
     while (1) {

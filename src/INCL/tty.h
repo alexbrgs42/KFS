@@ -88,4 +88,7 @@ void clear_buffer(uint16_t *screen_buffer);
 char get_char_from_input(char c);
 void handle_keyboard();
 
+
+void test_cpu_mode(void);
+
 #endif

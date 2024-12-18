@@ -116,6 +116,8 @@ void check_for_builtin(void) {
     reboot();
   } else if (strcmp(split_command, "halt") == 0) {
     halt();
-  }
+  } else if (strcmp(split_command, "stack") == 0) {
+    print_stack();
+}
 }
 

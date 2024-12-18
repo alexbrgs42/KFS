@@ -6,7 +6,8 @@ KERNEL_SRCS	=	../KERNEL/main.c \
 				../KERNEL/TTY/command.c \
 				../KERNEL/KEYBOARD/input.c \
 				../KERNEL/BUILTINS/help.c ../KERNEL/BUILTINS/color_change.c \
-				../KERNEL/BUILTINS/reboot.c ../KERNEL/BUILTINS/halt.c
+				../KERNEL/BUILTINS/reboot.c ../KERNEL/BUILTINS/halt.c \
+				../KERNEL/BUILTINS/print_stack.c
 
 # ---------------------------------------------------------------------------- #
 
@@ -21,7 +22,7 @@ C_BUILD_SRCS = ../CONF/gdt.c
 
 # ---------------------------------------------------------------------------- #
 
-ASM_SRCS = ../CONF/gdt_asm.asm ../CONF/boot.asm
+ASM_SRCS =  ../CONF/boot.asm  ../CONF/protected_mode.asm ../CONF/gdt_asm.asm
 
 # ---------------------------------------------------------------------------- #
 
@@ -31,7 +32,7 @@ LIBS_OBJS	=	$(LIBS_SRCS:.c=.o)
 
 C_BUILD_OBJS	=	$(C_BUILD_SRCS:.c=.o)
 
-ASM_OBJS	=	$(ASM_SRCS:.asm=.o)
+ASM_OBJS	=	$(ASM_SRCS:.asm=.o) 
 
 # ---------------------------------------------------------------------------- #
 
@@ -60,6 +61,7 @@ COLOR_END	=	\033[0m
 %.o: %.asm
 	@$(CLANG) $(TARGET) -c ../CONF/boot.asm -o ../CONF/boot.o
 	nasm -f elf32 ../CONF/gdt_asm.asm -o ../CONF/gdt_asm.o
+	nasm -f elf32 ../CONF/protected_mode.asm -o ../CONF/protected_mode.o
 	@echo "$(COLOR_BLUE) || Compiling ($<)...$(COLOR_END)"
 
 all: $(NAME)

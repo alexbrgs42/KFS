@@ -14,5 +14,18 @@ void kernel_main(void) {
   terminal_initialize();
   init_gdt();
 
+  enter_protected();
+
   handle_keyboard();
+}
+
+
+#include "../INCL/cpu.h"
+
+void test_cpu_mode(void) {
+    if (check_protected_mode()) {
+        printk(0, "CPU is in protected mode\n");
+    } else {
+        printk(0, "CPU is in real mode\n");
+    }
 }
