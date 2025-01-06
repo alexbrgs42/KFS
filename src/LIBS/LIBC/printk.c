@@ -1,5 +1,6 @@
-#include "../INCL/libc.h"
-#include "../INCL/tty.h"
+#include "../../INCL/libc.h"
+#include "../../INCL/tty.h"
+#include <stdint.h>
 
 /// @brief              printf-like function that also accepts a log-level
 /// @param log_level    How important the message is, 0 will only display the

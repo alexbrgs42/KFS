@@ -1,5 +1,6 @@
 #include "../INCL/libc.h"
 #include "../INCL/tty.h"
+#include "../INCL/gdt.h"
 
 size_t terminal_row[3];
 size_t terminal_column[3];

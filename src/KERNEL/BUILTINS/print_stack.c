@@ -1,65 +1,41 @@
-#include "../../INCL/tty.h"
+#include "../../INCL/builtins.h"
 #include "../../INCL/libc.h"
-#include "../../INCL/gdt.h"
+#include <stdint.h>
 
+uint16_t stack_trace(uint32_t *addresses, size_t max_len);
+static void hex_to_string(uint32_t num, char *str);
 
-static void hex_to_string(uint32_t num, char* str) {
-    const char hex_digits[] = "0123456789ABCDEF";
-    for (int i = 0; i < 8; i++) {
-        str[7 - i] = hex_digits[num & 0xF];
-        num >>= 4;
-    }
-    str[8] = '\0';
-}
+// Print the return addresses of stack frames (up to MAX_STACK_LEN)
+// It is currently impossible to associate these frames with a function name
+// as it would require being able to open and read files
+// We can only do it outside of the program, see Dockerfile for that
 
-void print_stack(void) {
-    uint32_t* ebp;
-    uint32_t* esp;
-    char hex[9];
+void print_stack() {
 
-    // Get current stack pointers
-    __asm__ volatile("mov %%ebp, %0" : "=r"(ebp));
-    __asm__ volatile("mov %%esp, %0" : "=r"(esp));
+  uint32_t addresses[MAX_STACK_LEN];
 
-    // Print header
-    printk(0, "\n=== Current Stack Frame ===\n");
-    
-    // Print base and stack pointers
-    printk(0, "Base Pointer (EBP): 0x");
-    hex_to_string((uint32_t)ebp, hex);
+  // Store addresses in the array and returns how many it found
+  uint16_t stack_len = stack_trace(addresses, MAX_STACK_LEN);
+
+  char hex[9];
+
+  printk(0, "-------- STACK FRAMES --------\n");
+
+  for (uint16_t i = 0; i < stack_len; i++) {
+    hex_to_string(addresses[i], hex);         // Store the str representation in 'hex'
+    printk(0, "stack frame begin: 0x");
     printk(0, hex);
     printk(0, "\n");
+  }
 
-    printk(0, "Stack Pointer (ESP): 0x");
-    hex_to_string((uint32_t)esp, hex);
-    printk(0, hex);
-    printk(0, "\n\n");
+  printk(0, "------------------------------\n");
+}
 
-    // Print stack contents
-    printk(0, "Stack Contents (ESP to EBP):\n");
-    printk(0, "Address     | Value\n");
-    printk(0, "-----------+-----------\n");
-
-    uint32_t* current = esp;
-    int count = 0;
-    
-    // Print up to 10 stack entries or until we reach EBP
-    while (current <= ebp && count < 10) {
-        // Print address
-        hex_to_string((uint32_t)current, hex);
-        printk(0, hex);
-        printk(0, " | ");
-
-        // Print value at address
-        hex_to_string(*current, hex);
-        printk(0, hex);
-        printk(0, "\n");
-
-        current++;
-        count++;
-    }
-
-    if (current < ebp) {
-        printk(0, "...\n");
-    }
+static void hex_to_string(uint32_t num, char *str) {
+  const char hex_digits[] = "0123456789ABCDEF";
+  for (int i = 0; i < 8; i++) {
+    str[7 - i] = hex_digits[num & 0xF];
+    num >>= 4;
+  }
+  str[8] = '\0';
 }

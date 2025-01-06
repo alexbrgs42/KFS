@@ -22,7 +22,7 @@ C_BUILD_SRCS = ../CONF/gdt.c
 
 # ---------------------------------------------------------------------------- #
 
-ASM_SRCS =  ../CONF/boot.asm  ../CONF/protected_mode.asm ../CONF/gdt_asm.asm
+ASM_SRCS =  ../CONF/boot.asm  ../CONF/protected_mode.asm ../CONF/gdt_asm.asm ../KERNEL/BUILTINS/stack_trace.asm
 
 # ---------------------------------------------------------------------------- #
 
@@ -43,8 +43,7 @@ INCL		=	../INCL
 NAME		=	kfs.bin
 
 TARGET		=	--target=i386-unknown-none
-
-FLAGS		=	-std=gnu99 -O2 -ffreestanding -Wall -Wextra -fno-builtin -fno-exceptions -fno-stack-protector -nostdlib -nodefaultlibs
+FLAGS		=	-std=gnu99 -O2 -ffreestanding -Wall -Wextra -fno-builtin -fno-exceptions -fno-stack-protector -nostdlib -nodefaultlibs -g
 
 COLOR_GREEN	=	\033[1;32m
 COLOR_RED	=	\033[1;31m
@@ -62,6 +61,7 @@ COLOR_END	=	\033[0m
 	@$(CLANG) $(TARGET) -c ../CONF/boot.asm -o ../CONF/boot.o
 	nasm -f elf32 ../CONF/gdt_asm.asm -o ../CONF/gdt_asm.o
 	nasm -f elf32 ../CONF/protected_mode.asm -o ../CONF/protected_mode.o
+	nasm -f elf32 ../KERNEL/BUILTINS/stack_trace.asm -o ../KERNEL/BUILTINS/stack_trace.o
 	@echo "$(COLOR_BLUE) || Compiling ($<)...$(COLOR_END)"
 
 all: $(NAME)
