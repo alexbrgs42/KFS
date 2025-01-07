@@ -9,5 +9,6 @@ void reboot(void);
 void halt(void);
 void print_stack(void);
 void print_gdt(void);
+void clear_screen(void);
 
 #endif

@@ -36,3 +36,11 @@ void terminal_backspace(void) {
   terminal_putchar(' ');
   move_cursor_back();
 }
+
+void terminal_empty_screen(void) {
+    reset_cursor();
+    for (uint64_t i = 0; i < VGA_WIDTH * VGA_HEIGHT; i++) {
+        printk(0, " ");
+    }
+    reset_cursor();
+}

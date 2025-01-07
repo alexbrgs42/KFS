@@ -10,4 +10,5 @@ void help(void) {
   printk(0, "  gdt    --> Displays gdt settings\n");
   printk(0, "  reboot --> .. it reboots\n");
   printk(0, "  halt   --> stops the program, ctrl to resume\n");
+  printk(0, "  clear  --> Clears the kterminal screen\n");
 }

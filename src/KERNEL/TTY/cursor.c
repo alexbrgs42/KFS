@@ -74,3 +74,9 @@ void enable_cursor(uint8_t cursor_start, uint8_t cursor_end) {
   outb(0x3D4, 0x0B);
   outb(0x3D5, (inb(0x3D5) & 0xE0) | cursor_end);
 }
+
+void reset_cursor(void) {
+    terminal_row[current_window - 1] = 0;
+    terminal_column[current_window - 1] = 0;
+    update_blinking_cursor();
+}
