@@ -36,8 +36,8 @@ void scroll_buffer(void) {
   // Clear the last row (bottom-most row of the screen)
   for (unsigned int i = (VGA_HEIGHT - 2) * VGA_WIDTH;
        i < (VGA_HEIGHT - 1) * VGA_WIDTH; i++) {
-    terminal_buffer[i] = vga_entry(' ', terminal_color);
-    terminal_windows[current_window - 1][i] = vga_entry(' ', terminal_color);
+    terminal_buffer[i] = vga_entry(' ', terminal_color[current_window - 1]);
+    terminal_windows[current_window - 1][i] = vga_entry(' ', terminal_color[current_window - 1]);
   }
 }
 
@@ -48,7 +48,7 @@ void clear_buffer(uint16_t *screen_buffer) {
   for (size_t y = 0; y < VGA_HEIGHT; y++) {
     for (size_t x = 0; x < VGA_WIDTH; x++) {
       const size_t index = y * VGA_WIDTH + x;
-      screen_buffer[index] = vga_entry(' ', terminal_color);
+      screen_buffer[index] = vga_entry(' ', terminal_color[current_window - 1]);
     }
   }
 }
