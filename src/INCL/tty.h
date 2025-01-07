@@ -72,6 +72,7 @@ void terminal_backspace(void);
 void clear_and_prepare_buffers(void);
 void print_info_line(void);
 void print_welcome_screen(uint8_t color);
+void terminal_empty_screen(void);
 
 uint8_t vga_entry_color(vga_color fg, vga_color bg);
 uint16_t vga_entry(unsigned char c, uint8_t color);
@@ -80,6 +81,7 @@ void enable_cursor(uint8_t cursor_start, uint8_t cursor_end);
 void update_cursor(bool line_break);
 void move_cursor_back(void);
 void update_blinking_cursor(void);
+void reset_cursor(void);
 
 void switch_window(uint16_t new_window);
 void scroll_buffer(void);
@@ -87,7 +89,6 @@ void clear_buffer(uint16_t *screen_buffer);
 
 char get_char_from_input(char c);
 void handle_keyboard();
-
 
 void test_cpu_mode(void);
 

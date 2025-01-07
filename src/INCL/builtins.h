@@ -7,6 +7,7 @@ void help(void);
 void color_change(char *color);
 void reboot(void);
 void halt(void);
-void print_stack(void);;
+void print_stack(void);
+void clear_screen(void);
 
 #endif
