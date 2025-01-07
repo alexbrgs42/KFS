@@ -118,6 +118,8 @@ void check_for_builtin(void) {
     halt();
   } else if (strcmp(split_command, "stack") == 0) {
     print_stack();
-}
+  } else if (strcmp(split_command, "gdt") == 0) {
+    print_gdt();
+  }
 }
 
