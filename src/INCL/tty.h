@@ -16,7 +16,7 @@ extern size_t terminal_row[3];    /* row of the cursor of the terminal in the
                                      different windows */
 extern size_t terminal_column[3]; /* column of the cursor of the terminal in the
                                      different windows */
-extern uint8_t terminal_color;    /* color of the text of the terminal */
+extern uint8_t terminal_color[3];    /* color of the text of the terminal */
 extern uint16_t *terminal_buffer; /* vga buffer for writing on the terminal */
 extern uint16_t current_window;   /* indicates which terminal window we're on */
 

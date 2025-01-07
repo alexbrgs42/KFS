@@ -17,7 +17,9 @@ void terminal_initialize(void) {
   terminal_column[1] = 0;
   terminal_column[2] = 0;
 
-  terminal_color = vga_entry_color(VGA_COLOR_LIGHT_GREY, VGA_COLOR_BLACK);
+  terminal_color[0] = vga_entry_color(VGA_COLOR_LIGHT_GREY, VGA_COLOR_BLACK);
+  terminal_color[1] = vga_entry_color(VGA_COLOR_LIGHT_GREY, VGA_COLOR_BLACK);
+  terminal_color[2] = vga_entry_color(VGA_COLOR_LIGHT_GREY, VGA_COLOR_BLACK);
   terminal_buffer = (uint16_t *)0xB8000;
 
   current_window = 1;
@@ -63,7 +65,7 @@ void clear_and_prepare_buffers(void) {
 void print_info_line(void) {
 
   uint16_t index = current_window - 1;
-  uint8_t previous_color = terminal_color;
+  uint8_t previous_color = terminal_color[current_window - 1];
 
   size_t row_tmp = terminal_row[index];
   size_t col_tmp = terminal_column[index];
@@ -112,7 +114,7 @@ void print_info_line(void) {
 /// @brief                  Displays mandatory 42 mention
 void print_welcome_screen(uint8_t color) {
 
-  uint8_t previous_color = terminal_color;
+  uint8_t previous_color = terminal_color[current_window - 1];
   terminal_set_color(color);
 
   printk(0, "/* "

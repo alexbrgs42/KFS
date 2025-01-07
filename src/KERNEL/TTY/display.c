@@ -15,7 +15,7 @@ void terminal_putchar(char c) {
   if (c == '\n') {
     update_cursor(true);
   } else {
-    terminal_putentryat(c, terminal_color, terminal_column[index],
+    terminal_putentryat(c, terminal_color[current_window - 1], terminal_column[index],
                         terminal_row[index]);
     update_cursor(false);
   }

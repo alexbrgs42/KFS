@@ -4,7 +4,7 @@
 
 size_t terminal_row[3];
 size_t terminal_column[3];
-uint8_t terminal_color;
+uint8_t terminal_color[3];
 uint16_t *terminal_buffer;
 uint16_t current_window;
 
@@ -20,8 +20,6 @@ void kernel_main(void) {
   handle_keyboard();
 }
 
-// verif couleur apres clear
-// couleur pour chaque ecran
 // ajouter commentaires
 // enlever les commentaires pas clean
 // mettre des const

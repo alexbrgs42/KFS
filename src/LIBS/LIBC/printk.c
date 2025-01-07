@@ -9,7 +9,7 @@
 /// @return             0, TODO: 1 for error
 int printk(uint16_t log_level, const char *string) {
 
-  uint8_t previous_color = terminal_color;
+  uint8_t previous_color = terminal_color[current_window - 1];
 
   switch (log_level) {
 
