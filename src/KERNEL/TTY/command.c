@@ -120,7 +120,6 @@ void check_for_builtin(void) {
     print_stack();
   } else if (strcmp(split_command, "clear") == 0) {
     clear_screen();
-  }
   } else if (strcmp(split_command, "gdt") == 0) {
     print_gdt();
   }

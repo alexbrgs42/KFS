@@ -7,7 +7,8 @@ extern struct gdt_entry_struct gdt_entries[7];
 
 void  print_gdt() {
   
-  printk(0, "---- Global Descriptor Table ----\n");
+  printk(0, "--------- Global Descriptor Table ---------\n");
+  printk(0, " limit | base_low | base_mid | access | flags | base_high\n"); 
 
   char hex[9]; 
   for (int i = 0; i < 7; i ++) {
@@ -31,7 +32,7 @@ void  print_gdt() {
     printk(0, "\n");
   }
 
-  printk(0, "---------------------------------\n");
+  printk(0, "-------------------------------------------\n");
 }
 
 static void hex_to_string(uint32_t num, char *str) {
