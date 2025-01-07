@@ -14,4 +14,14 @@ static inline int check_protected_mode(void) {
     return mode;
 }
 
+// #include "../INCL/cpu.h"
+
+// void test_cpu_mode(void) {
+//     if (check_protected_mode()) {
+//         printk(0, "CPU is in protected mode\n");
+//     } else {
+//         printk(0, "CPU is in real mode\n");
+//     }
+// }
+
 #endif

@@ -124,4 +124,3 @@ void check_for_builtin(void) {
     print_gdt();
   }
 }
-

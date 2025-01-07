@@ -63,6 +63,7 @@ void clear_and_prepare_buffers(void) {
 void print_info_line(void) {
 
   uint16_t index = current_window - 1;
+  uint8_t previous_color = terminal_color;
 
   size_t row_tmp = terminal_row[index];
   size_t col_tmp = terminal_column[index];
@@ -105,12 +106,13 @@ void print_info_line(void) {
   terminal_row[index] = row_tmp;
   terminal_column[index] = col_tmp;
 
-  terminal_set_color(VGA_COLOR_WHITE);
+  terminal_set_color(previous_color);
 }
 
 /// @brief                  Displays mandatory 42 mention
 void print_welcome_screen(uint8_t color) {
 
+  uint8_t previous_color = terminal_color;
   terminal_set_color(color);
 
   printk(0, "/* "
@@ -134,5 +136,5 @@ void print_welcome_screen(uint8_t color) {
             "******************************************************************"
             "******* */\n");
 
-  terminal_set_color(VGA_COLOR_WHITE);
+  terminal_set_color(previous_color);
 }

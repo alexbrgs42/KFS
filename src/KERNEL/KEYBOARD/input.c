@@ -41,8 +41,8 @@ void handle_keyboard() {
         switch_window(2);
       } else if (c == KEYCODE_3) {
         switch_window(3);
-      } else if (c == KEYCODE_4) {
-        test_cpu_mode();
+      // } else if (c == KEYCODE_4) {
+      //   test_cpu_mode();
       } else if (c > 0) {
         terminal_putinput(c & 0x7F);
         append_to_command_buffer(c & 0x7F);

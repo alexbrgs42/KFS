@@ -20,17 +20,6 @@ void kernel_main(void) {
   handle_keyboard();
 }
 
-
-#include "../INCL/cpu.h"
-
-void test_cpu_mode(void) {
-    if (check_protected_mode()) {
-        printk(0, "CPU is in protected mode\n");
-    } else {
-        printk(0, "CPU is in real mode\n");
-    }
-}
-
 // backspace retour ligne d'avant
-// bloquer backspace $>
 // verif couleur apres clear
+// couleur pour chaque ecran
