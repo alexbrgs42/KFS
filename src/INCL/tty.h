@@ -68,6 +68,7 @@ void terminal_set_color(uint8_t color);
 void terminal_write_buffer(const char *data);
 void terminal_putentryat(char c, uint8_t color, size_t x, size_t y);
 void terminal_backspace(void);
+bool terminal_is_empty_command(void);
 
 void clear_and_prepare_buffers(void);
 void print_info_line(void);

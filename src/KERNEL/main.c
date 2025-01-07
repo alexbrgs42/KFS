@@ -30,3 +30,7 @@ void test_cpu_mode(void) {
         printk(0, "CPU is in real mode\n");
     }
 }
+
+// backspace retour ligne d'avant
+// bloquer backspace $>
+// verif couleur apres clear

@@ -28,13 +28,26 @@ void terminal_write_buffer(const char *data) {
   }
 }
 
-//TODO : Make it unable to move past the prompt
 /// @brief    Erase the last character (replace by space)
 void terminal_backspace(void) {
+    if (terminal_is_empty_command() == false) {
+      move_cursor_back();
+      terminal_putchar(' ');
+      move_cursor_back();
+    }
+}
 
-  move_cursor_back();
-  terminal_putchar(' ');
-  move_cursor_back();
+bool terminal_is_empty_command(void) {
+    uint16_t index = current_window - 1;
+    uint16_t pos = terminal_row[index] * VGA_WIDTH + terminal_column[index];
+  
+    char cmd[3];
+    cmd[0] = terminal_buffer[pos - 2];
+    cmd[1] = terminal_buffer[pos - 1];
+    cmd[2] = '\0';
+    if (strcmp(cmd, "$>") == 0)
+      return true;
+    return false;
 }
 
 void terminal_empty_screen(void) {
