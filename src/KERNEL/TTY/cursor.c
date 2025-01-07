@@ -38,7 +38,7 @@ void move_cursor_back(void) {
   if (terminal_column[index] == 0) {
     if (terminal_row[index] != 0) {
       terminal_row[index]--;
-      terminal_column[index] = VGA_WIDTH;
+      terminal_column[index] = VGA_WIDTH - 1;
     }
   } else {
     terminal_column[index]--;

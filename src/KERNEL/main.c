@@ -20,6 +20,8 @@ void kernel_main(void) {
   handle_keyboard();
 }
 
-// backspace retour ligne d'avant
 // verif couleur apres clear
 // couleur pour chaque ecran
+// ajouter commentaires
+// enlever les commentaires pas clean
+// mettre des const
