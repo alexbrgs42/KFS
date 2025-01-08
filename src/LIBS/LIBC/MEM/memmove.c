@@ -7,15 +7,14 @@
 /// @param n
 /// @return     dest or NULL
 void *memmove(void *dest, const void *src, size_t n) {
+    if (src == NULL) {
+        return (NULL);
+    }
 
-  if (src == NULL) {
-    return (NULL);
-  }
+    unsigned char buffer[n];
 
-  unsigned char buffer[n];
+    memcpy(buffer, src, n);
+    memcpy(dest, buffer, n);
 
-  memcpy(buffer, src, n);
-  memcpy(dest, buffer, n);
-
-  return (dest);
+    return (dest);
 }

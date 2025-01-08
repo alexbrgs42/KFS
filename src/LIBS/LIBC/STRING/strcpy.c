@@ -5,18 +5,17 @@
 /// @param src  Assumed to be terminated by /0
 /// @return     dest or NULL
 char *strcpy(char *dest, const char *src) {
+    if (src == NULL) {
+        return (NULL);
+    }
 
-  if (src == NULL) {
-    return (NULL);
-  }
+    uint16_t iter = 0;
 
-  uint16_t iter = 0;
-
-  while (src[iter] != 0) {
+    while (src[iter] != 0) {
+        dest[iter] = src[iter];
+        iter++;
+    }
     dest[iter] = src[iter];
-    iter++;
-  }
-  dest[iter] = src[iter];
 
-  return (dest);
+    return (dest);
 }

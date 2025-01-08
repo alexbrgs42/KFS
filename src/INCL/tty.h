@@ -9,7 +9,8 @@
 /*                                GLOBAL VARIABLES */
 /**********************************************************************************/
 
-static const size_t VGA_WIDTH = 80; /* vga format */
+/* vga format */
+static const size_t VGA_WIDTH = 80;
 static const size_t VGA_HEIGHT = 25;
 
 extern size_t terminal_row[3];    /* row of the cursor of the terminal in the
@@ -22,7 +23,6 @@ extern uint16_t current_window;   /* indicates which terminal window we're on */
 
 extern uint16_t terminal_windows[3][2000];
 
-// TODO : once memory is configured, malloc the required size only
 static char command_buffer[3][1024];
 static char split_command[512];
 static char split_arg1[256];
@@ -34,22 +34,22 @@ static char split_arg2[256];
 
 /* Hardware text mode color constants. */
 enum vga_color {
-  VGA_COLOR_BLACK = 0,
-  VGA_COLOR_BLUE = 1,
-  VGA_COLOR_GREEN = 2,
-  VGA_COLOR_CYAN = 3,
-  VGA_COLOR_RED = 4,
-  VGA_COLOR_MAGENTA = 5,
-  VGA_COLOR_BROWN = 6,
-  VGA_COLOR_LIGHT_GREY = 7,
-  VGA_COLOR_DARK_GREY = 8,
-  VGA_COLOR_LIGHT_BLUE = 9,
-  VGA_COLOR_LIGHT_GREEN = 10,
-  VGA_COLOR_LIGHT_CYAN = 11,
-  VGA_COLOR_LIGHT_RED = 12,
-  VGA_COLOR_LIGHT_MAGENTA = 13,
-  VGA_COLOR_LIGHT_BROWN = 14,
-  VGA_COLOR_WHITE = 15,
+    VGA_COLOR_BLACK = 0,
+    VGA_COLOR_BLUE = 1,
+    VGA_COLOR_GREEN = 2,
+    VGA_COLOR_CYAN = 3,
+    VGA_COLOR_RED = 4,
+    VGA_COLOR_MAGENTA = 5,
+    VGA_COLOR_BROWN = 6,
+    VGA_COLOR_LIGHT_GREY = 7,
+    VGA_COLOR_DARK_GREY = 8,
+    VGA_COLOR_LIGHT_BLUE = 9,
+    VGA_COLOR_LIGHT_GREEN = 10,
+    VGA_COLOR_LIGHT_CYAN = 11,
+    VGA_COLOR_LIGHT_RED = 12,
+    VGA_COLOR_LIGHT_MAGENTA = 13,
+    VGA_COLOR_LIGHT_BROWN = 14,
+    VGA_COLOR_WHITE = 15,
 };
 typedef enum vga_color vga_color;
 
@@ -89,7 +89,7 @@ void scroll_buffer(void);
 void clear_buffer(uint16_t *screen_buffer);
 
 char get_char_from_input(char c);
-void handle_keyboard();
+void handle_keyboard(void);
 
 void test_cpu_mode(void);
 

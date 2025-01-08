@@ -5,10 +5,10 @@ KERNEL_SRCS	=	../KERNEL/main.c \
 				../KERNEL/TTY/vga.c ../KERNEL/TTY/cursor.c ../KERNEL/TTY/windows.c \
 				../KERNEL/TTY/command.c \
 				../KERNEL/KEYBOARD/input.c \
-				../KERNEL/BUILTINS/help.c ../KERNEL/BUILTINS/color_change.c \
-				../KERNEL/BUILTINS/reboot.c ../KERNEL/BUILTINS/halt.c \
-				../KERNEL/BUILTINS/print_stack.c ../KERNEL/BUILTINS/print_gdt.c \
-				../KERNEL/BUILTINS/clear.c
+				../KERNEL/BUILTINS/builtin_help.c ../KERNEL/BUILTINS/builtin_color.c \
+				../KERNEL/BUILTINS/builtin_reboot.c ../KERNEL/BUILTINS/builtin_halt.c \
+				../KERNEL/BUILTINS/builtin_stack.c ../KERNEL/BUILTINS/builtin_gdt.c \
+				../KERNEL/BUILTINS/builtin_clear.c
 
 # ---------------------------------------------------------------------------- #
 

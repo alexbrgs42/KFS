@@ -8,21 +8,19 @@
 /// @param n
 /// @return     dest or NULL
 void *memcpy(void *dest, const void *src, size_t n) {
+    if (src == NULL) {
+        return (NULL);
+    }
 
-  if (src == NULL) {
-    return (NULL);
-  }
+    unsigned char *d = dest;
+    unsigned const char *s = src;
 
-  unsigned char *d = dest;
-  unsigned const char *s = src;
+    size_t iter = 0;
 
-  size_t iter = 0;
+    while (iter < n) {
+        *(d + iter) = *(s + iter);
+        iter++;
+    }
 
-  while (iter < n) {
-
-    *(d + iter) = *(s + iter);
-    iter++;
-  }
-
-  return (dest);
+    return (dest);
 }
